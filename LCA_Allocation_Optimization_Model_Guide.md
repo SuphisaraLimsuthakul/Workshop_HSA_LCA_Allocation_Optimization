@@ -78,7 +78,7 @@ Index note:
 
 ## 4) Constraint System
 
-## (0) Destination conversion gating by monthly requirement
+## (1) Destination conversion gating by monthly requirement
 
 For each destination product $p$ and month $t$:
 $$
@@ -94,7 +94,7 @@ Business meaning:
 
 ---
 
-## (1) Monthly inventory balance
+## (2) Monthly inventory balance
 
 For each product $p$:
 
@@ -128,21 +128,21 @@ Business meaning:
 
 ---
 
-## (2) Allocation definition
+## (3) Allocation definition
 $$
 A_{p,t}=I_{p,t}
 $$
 
 ---
 
-## (3) Surplus / shortage balance
+## (4) Surplus / shortage balance
 $$
 Sur_{p,t}-Short_{p,t}=A_{p,t}-R_{p,t}
 $$
 
 ---
 
-## (3.1) Two-month advance buy linkage
+## (4.1) Two-month advance buy linkage
 
 For order months that can map to an in-horizon shortage month:
 $$
@@ -165,7 +165,7 @@ Business meaning:
 
 ---
 
-## (3.2) Shortage upper bound by requirement
+## (4.2) Shortage upper bound by requirement
 $$
 Short_{p,t}\le R_{p,t}
 $$
@@ -176,14 +176,14 @@ Business meaning:
 
 ---
 
-## (4) Idle usage cap
+## (5) Idle usage cap
 $$
 y_{p,t}\le IdleInv_{p,t}
 $$
 
 ---
 
-## (4.1) Idle inventory ledger balance
+## (5.1) Idle inventory ledger balance
 
 For non-idle-ledger products:
 $$
@@ -204,7 +204,7 @@ with the same source deduction timing as the main inventory ledger.
 
 ---
 
-## (5) Source conversion cap by inventory from two months ago
+## (6) Source conversion cap by inventory from two months ago
 
 - First two months:
 $$
@@ -220,7 +220,7 @@ Business meaning:
 
 ---
 
-## (6) Idle usage cap by two-month lag
+## (7) Idle usage cap by two-month lag
 
 - First two months:
 $$
@@ -233,7 +233,7 @@ $$
 
 ---
 
-## (7) Route activation and destination-side single-source rule
+## (8) Route activation and destination-side single-source rule
 
 Route/flow linking:
 $$
@@ -252,7 +252,7 @@ Business meaning:
 
 ---
 
-## (7.05) Optional anti-prebuild rule (requirement-month mode)
+## (8.1) Optional anti-prebuild rule (requirement-month mode)
 
 When `allocation_timing_mode = requirement_month`:
 $$
@@ -265,7 +265,7 @@ Business meaning:
 
 ---
 
-## (7.1) Cooldown (no consecutive-month conversion by same source)
+## (8.2) Cooldown (no consecutive-month conversion by same source)
 $$
 \sum_{p\in Dest(q)} z_{p,q,t}+\sum_{p\in Dest(q)} z_{p,q,t+1}\le 1
 $$
