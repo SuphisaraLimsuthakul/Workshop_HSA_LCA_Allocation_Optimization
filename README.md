@@ -40,12 +40,8 @@ Required Python packages:
   - cd Workshop_HSA_LCA_Allocation_Optimization
 3. Create virtual environment:
   - python -m venv .venv
-4. Activate virtual environment (Windows PowerShell):
-  - .venv\Scripts\Activate.ps1
 5. Install dependencies:
   - pip install pandas ortools openpyxl
-6. Move to working folder:
-  - cd workshop
 
 ## 5) How to run
 1. Open the script and confirm input/output paths in the main section.
