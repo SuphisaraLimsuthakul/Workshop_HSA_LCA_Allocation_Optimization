@@ -27,6 +27,64 @@ The script expects these sheets in the input workbook:
 Current default input path in main:
 - input/Demo_input_POR3.xlsx
 
+### 2.1) Input data details (Demo structure input)
+
+Use long format (one row per Product + period) for requirement and idle sheets.
+
+df_re_final (requirement):
+- Required columns:
+  - Product
+  - MonthKey, or Year + Quarter + Month
+  - Value_Round (used by optimization model in this script)
+- Optional columns:
+  - Value (preferred for display/output if available)
+  - Round2
+- Data quality rules:
+  - Keep one business meaning per row for each Product + period.
+  - Avoid duplicate Product + period rows unless your preprocessing intentionally aggregates them.
+  - Ensure period labels are consistent (for example, no mixed spellings like Sep/September).
+
+df_idel_final (idle capacity):
+- Required columns:
+  - Product
+  - Value
+- Time columns:
+  - MonthKey, or Year + Quarter + Month, or Month
+- Behavior note:
+  - If no month field is provided, preprocessing may replicate idle values across all months.
+
+df_in_final (opening inventory):
+- Required columns:
+  - Product
+  - Value
+
+df_con_cost (conversion cost):
+- Required columns:
+  - Product Name (From)
+  - Product Name (To)
+  - Cost
+- Notes:
+  - Cost must be numeric.
+  - Source and destination product names should align with Product naming used in df_re_final.
+
+df_cost (new buy / purchase cost):
+- Required columns:
+  - Product
+  - Cost
+- Notes:
+  - Cost must be numeric.
+
+Common column-name mapping before run (if your source uses different headers):
+- Product_Name -> Product
+- LCA Requirement -> Value_Round (for this single script)
+
+Quick validation checklist before running:
+1. All required sheets exist.
+2. Product naming is consistent across sheets.
+3. Cost columns are numeric (no text/null leftovers).
+4. Period fields are complete and consistently formatted.
+5. Requirement values are in Value_Round for optimization.
+
 ## 3) Environment and dependencies
 Required Python packages:
 - pandas
